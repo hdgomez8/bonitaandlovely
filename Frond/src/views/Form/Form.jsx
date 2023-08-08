@@ -41,7 +41,7 @@ const Form = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/proveedor")
+      .get("/proveedor")
       .then((response) => {
         setProviders(response.data);
       })
@@ -69,7 +69,7 @@ const Form = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost:3001/producto",
+          "/producto",
           values
         );
         console.log("Producto creado:", response.data);
