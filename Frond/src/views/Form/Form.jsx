@@ -68,10 +68,7 @@ const Form = () => {
       console.log("Valores enviados:", values);
 
       try {
-        const response = await axios.post(
-          "/producto",
-          values
-        );
+        const response = await axios.post("/producto", values);
         console.log("Producto creado:", response.data);
         resetForm();
       } catch (error) {
@@ -100,7 +97,7 @@ const Form = () => {
 
   const handleSelectChangeBrands = (event) => {
     const selectedValue = event.target.value;
-    const splitValues = selectedValue.split('-');
+    const splitValues = selectedValue.split("-");
     const selectedBrandId = splitValues[1];
     const selectedBrandsObj = brandsOptions.find(
       (option) => option.id === selectedValue
@@ -113,7 +110,7 @@ const Form = () => {
 
   const handleSelectChangeCategories = (event) => {
     const selectedValue = event.target.value;
-    const splitValues = selectedValue.split('-');
+    const splitValues = selectedValue.split("-");
     const selectedCategoriesId = splitValues[1];
     const selectedCategoriesObj = categoriesOptions.find(
       (option) => option.id === selectedValue
@@ -126,7 +123,7 @@ const Form = () => {
 
   const handleSelectChangeSize = (event) => {
     const selectedValue = event.target.value;
-    const splitValues = selectedValue.split('-');
+    const splitValues = selectedValue.split("-");
     const selectedSizeId = splitValues[1];
     const selectedSizeObj = sizesOptions.find(
       (option) => option.id === selectedValue
@@ -160,7 +157,9 @@ const Form = () => {
                     value={formik.values.name}
                   />
                   {formik.touched.name && formik.errors.name ? (
-                    <div className={style.error}>{formik.errors.name}</div>
+                    <div className="text-red-500 text-sm mt-1">
+                      {formik.errors.name}
+                    </div>
                   ) : null}
                 </div>
               </div>
@@ -183,13 +182,12 @@ const Form = () => {
                   />
                   {formik.touched.precio_compra &&
                   formik.errors.precio_compra ? (
-                    <div className={style.error}>
+                    <div className="text-red-500 text-sm mt-1">
                       {formik.errors.precio_compra}
                     </div>
                   ) : null}
                 </div>
               </div>
-
 
               {/* campo Porcentaje De Ganancia*/}
               <div>
