@@ -20,7 +20,7 @@ import axios from "axios"
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 //para no repetir el puerto:(se está configurando una URL base que se utilizará como prefijo para todas las peticiones realizadas con Axios) 
-axios.defaults.baseURL = "http://localhost:3001/"
+axios.defaults.baseURL = "https://bonitaandlovely-production.up.railway.app/"
 
 // import ActionProvider from "./components/ChatBot/ActionProvider";
 
