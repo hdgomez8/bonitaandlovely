@@ -1,10 +1,9 @@
 const { Producto, Subcategoria } = require('../../db');
 
-module.exports = async (page, size) => {
+module.exports = async () => {
   try {
-    const productos = await Producto.findAndCountAll({
-      limit: size,
-      offset: page * size,
+    
+    const productos = await Producto.findAll({
       include: {
         model: Subcategoria,
         attributes: ['name'],
@@ -12,7 +11,9 @@ module.exports = async (page, size) => {
       },
     });
 
-    productos.rows.forEach((producto) => {
+    console.log(productos);
+
+    productos.forEach((producto) => {
       producto.dataValues.id = `col-${producto.dataValues.id}`;
     });
 
