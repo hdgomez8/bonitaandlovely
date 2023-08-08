@@ -8,7 +8,11 @@ import { sizes, categories, brands } from "../../redux/actions";
 import style from "./Form.module.css";
 
 const validationSchema = yup.object({
-  name: yup.string().required("El nombre del producto es obligatorio"),
+  name: yup
+    .string()
+    .required("El nombre del producto es obligatorio")
+    .min(5, "El nombre debe tener al menos 3 caracteres")
+    .max(50, "El nombre no debe exceder los 50 caracteres"),
   precio_compra: yup
     .number()
     .typeError("El precio del producto debe ser un número válido")
@@ -191,28 +195,31 @@ const Form = () => {
 
               {/* campo Porcentaje De Ganancia*/}
               <div>
-                <label htmlFor="PercentageOfProfit">
-                  Porcentaje De Ganancia{" "}
-                </label>
-                <div>
-                  <input
-                    type="text"
-                    className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring focus:border-blue-300"
-                    placeholder="Ingrese el Porcentaje de ganancia"
-                    id="PercentageOfProfit"
-                    name="porcentaje_ganancia"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.porcentaje_ganancia}
-                  />
-                  {formik.touched.porcentaje_ganancia &&
-                  formik.errors.porcentaje_ganancia ? (
-                    <div className={style.error}>
-                      {formik.errors.porcentaje_ganancia}
-                    </div>
-                  ) : null}
-                </div>
-              </div>
+  <label htmlFor="PercentageOfProfit" className="block font-bold mb-2">
+    Porcentaje De Ganancia
+  </label>
+  <div className="flex items-center">
+    <input
+      type="range"
+      min="10"
+      max="100"
+      step="10"
+      className="w-full"
+      id="PercentageOfProfit"
+      name="porcentaje_ganancia"
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      value={formik.values.porcentaje_ganancia}
+    />
+    <span className="ml-4">{formik.values.porcentaje_ganancia}%</span>
+  </div>
+  {formik.touched.porcentaje_ganancia && formik.errors.porcentaje_ganancia && (
+    <div className="text-red-500 text-sm mt-1">
+      {formik.errors.porcentaje_ganancia}
+    </div>
+  )}
+</div>
+
 
               {/* campo precio venta  */}
               <div>
