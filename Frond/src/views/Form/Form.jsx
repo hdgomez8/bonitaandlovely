@@ -199,7 +199,7 @@ const Form = () => {
                   Precio de compra del Producto{" "}
                 </label>
                 <div className="flex">
-                <span className="text-gray-600">$</span>
+                  <span className="text-gray-600">$</span>
                   <input
                     type="text"
                     className="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring focus:border-blue-300"
@@ -268,7 +268,7 @@ const Form = () => {
                     value={formik.values.precio_venta}
                   />
                   {formik.touched.precio_venta && formik.errors.precio_venta ? (
-                    <div className={style.error}>
+                    <div className="text-red-500 text-sm mt-1">
                       {formik.errors.precio_venta}
                     </div>
                   ) : null}
@@ -316,7 +316,7 @@ const Form = () => {
                   />
                   {formik.touched.referencia_proveedor &&
                   formik.errors.referencia_proveedor ? (
-                    <div className={style.error}>
+                    <div className="text-red-500 text-sm mt-1">
                       {formik.errors.referencia_proveedor}
                     </div>
                   ) : null}
@@ -336,13 +336,24 @@ const Form = () => {
                   name="descripcion"
                   placeholder="Escriba una breve descripcion del producto"
                   rows="4"
-                  className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
+                  className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300 ${
+                    formik.touched.descripcion && formik.errors.descripcion
+                      ? 'border-red-500' 
+                      : 'border-gray-300'
+                  }`}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
+                  value={formik.values.descripcion}
                 />
+                {formik.touched.descripcion && formik.errors.descripcion ? (
+                  <div className="text-red-500 text-sm mt-1">
+                    {formik.errors.descripcion}
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
+
           <div className={`flex justify-center ${style.rightSection}`}>
             <div className="w-2/3">
               {/* campo Tamaño Producto  */}
@@ -365,6 +376,11 @@ const Form = () => {
                       </option>
                     ))}
                   </select>
+                  {formik.touched.tamañoId && formik.errors.tamañoId ? (
+                    <div className="text-red-500 text-sm mt-1">
+                      {formik.errors.tamañoId}
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
@@ -388,6 +404,11 @@ const Form = () => {
                       </option>
                     ))}
                   </select>
+                  {formik.touched.marcaId && formik.errors.marcaId ? (
+                    <div className="text-red-500 text-sm mt-1">
+                      {formik.errors.marcaId}
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
@@ -413,6 +434,11 @@ const Form = () => {
                       </option>
                     ))}
                   </select>
+                  {formik.touched.categoriaId && formik.errors.categoriaId ? (
+                    <div className="text-red-500 text-sm mt-1">
+                      {formik.errors.categoriaId}
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
