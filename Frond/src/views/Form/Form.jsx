@@ -103,7 +103,7 @@ const Form = () => {
       console.log("Valores enviados:", values);
 
       try {
-        let updatedValuess = { ...values };
+        const updatedValues = { ...values };
 
         if (values.imagenPrincipal) {
           const formData = new FormData();
@@ -122,12 +122,12 @@ const Form = () => {
           setImageUrl(response.data.data.url);
         }
 
-        updatedValuess = {
-          ...updatedValuess,
+        updatedValues = {
+          ...updatedValues,
           imagenPrincipal: response.data.data.url,
         };
 
-        const response = await axios.post("/producto", updatedValuess);
+        const response = await axios.post("/producto", updatedValues);
 
         console.log("Producto creado:", response.data);
         resetForm();
