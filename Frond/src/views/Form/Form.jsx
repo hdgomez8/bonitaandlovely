@@ -84,7 +84,7 @@ const Form = () => {
       name: "",
       descripcion: "",
       precio_compra: "",
-      porcentaje_ganancia: "",
+      porcentaje_ganancia: 10,
       precio_venta: "",
       referencia_proveedor: "",
       marcaId: "",
@@ -452,15 +452,20 @@ const Form = () => {
               </div>
 
               {/* campo imagen del producto */}
-              {selectedImage && (
-                <div className="w-full h-64 border border-gray-300 rounded-lg overflow-hidden">
-                  <img
-                    src={selectedImage}
-                    alt="Imagen seleccionada"
-                    className="w-full h-full object-cover"
-                  />
+              <div className="w-full h-64 border border-gray-300 rounded-lg overflow-hidden">
+                {/* Círculo para cargar la imagen */}
+                <div className="w-32 h-32 mx-auto bg-gray-200 rounded-full flex items-center justify-center">
+                  {selectedImage ? (
+                    <img
+                      src={selectedImage}
+                      alt="Imagen seleccionada"
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  ) : (
+                    <span className="text-gray-600">Cargar imagen</span>
+                  )}
                 </div>
-              )}
+              </div>
               <input
                 type="file"
                 accept="image/*"
