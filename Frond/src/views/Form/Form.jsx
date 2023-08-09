@@ -53,6 +53,11 @@ const Form = () => {
   const categoriesOptions = useSelector((state) => state.Allcategories);
   const brandsOptions = useSelector((state) => state.Allbrands);
 
+  const [imageUrl, setImageUrl] = useState("");
+
+  const imgbbApiKey = "cf44a253679320997c892d7e7a273f04";
+  const imgbbUploadUrl = "https://api.imgbb.com/1/upload";
+
   useEffect(() => {
     dispatch(sizes());
   }, [dispatch]);
@@ -97,7 +102,30 @@ const Form = () => {
       console.log("Valores enviados:", values);
 
       try {
-        const response = await axios.post("/producto", values);
+        if (values.imagenPrincipal) {
+          const formData = new FormData();
+          formData.append("image", values.imagenPrincipal);
+
+          const response = await axios.post(imgbbUploadUrl, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            params: {
+              key: imgbbApiKey,
+            },
+          });
+
+          console.log("Imagen subida a imgbb:", response.data);
+          setImageUrl(response.data.data.url);
+        }
+
+        const updatedValues = {
+          ...values,
+          imagenPrincipal: imageUrl,
+        };
+
+        const response = await axios.post("/producto", updatedValues);
+
         console.log("Producto creado:", response.data);
         resetForm();
       } catch (error) {
@@ -113,14 +141,6 @@ const Form = () => {
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setSelectedImage(imageUrl);
-    }
-  };
 
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;
@@ -193,7 +213,7 @@ const Form = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.name}
-                    style={{ borderColor: 'rgb(222, 190, 234)' }}
+                    style={{ borderColor: "rgb(222, 190, 234)" }}
                   />
                   {formik.touched.name && formik.errors.name ? (
                     <div className="text-red-500 text-sm mt-1">
@@ -456,9 +476,9 @@ const Form = () => {
               <div className="w-full h-80 border border-gray-300 rounded-lg overflow-hidden flex items-center justify-center">
                 {/* Círculo más grande */}
                 <div className="w-64 h-64 bg-gray-200 rounded-full flex items-center justify-center">
-                  {selectedImage ? (
+                  {imageUrl ? (
                     <img
-                      src={selectedImage}
+                      src={imageUrl}
                       alt="Imagen seleccionada"
                       className="w-full h-full object-cover rounded-full"
                     />
@@ -469,8 +489,15 @@ const Form = () => {
               </div>
               <input
                 type="file"
+                id="imagenPrincipal"
+                name="imagenPrincipal"
                 accept="image/*"
-                onChange={handleImageChange}
+                onChange={(event) => {
+                  formik.setFieldValue(
+                    "imagenPrincipal",
+                    event.currentTarget.files[0]
+                  );
+                }}
                 className="mb-4"
               />
 
