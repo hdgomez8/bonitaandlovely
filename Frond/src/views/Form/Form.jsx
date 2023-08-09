@@ -118,13 +118,13 @@ const Form = () => {
             },
           });
 
-          console.log("Imagen subida a imgbb:", response.data.data.display_url);
-          setImageUrl(response.data.data.display_url);
+          console.log("Imagen subida a imgbb:", response.data.data.url);
+          setImageUrl(response.data.data.url);
         }
 
         updatedValues = {
           ...updatedValues,
-          imagenPrincipal: response.data.data.display_url,
+          imagenPrincipal: imageUrl,
         };
 
         const response = await axios.post("/producto", updatedValues);
