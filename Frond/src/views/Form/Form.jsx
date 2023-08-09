@@ -88,6 +88,7 @@ const Form = () => {
     initialValues: {
       name: "",
       descripcion: "",
+      imagenPrincipal: null,
       precio_compra: "",
       porcentaje_ganancia: 10,
       precio_venta: "",
