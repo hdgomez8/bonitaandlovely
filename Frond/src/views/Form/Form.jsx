@@ -112,6 +112,15 @@ const Form = () => {
   const [selectedCategories, setSelectedCategories] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+    }
+  };
 
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;
@@ -338,8 +347,8 @@ const Form = () => {
                   rows="4"
                   className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300 ${
                     formik.touched.descripcion && formik.errors.descripcion
-                      ? 'border-red-500' 
-                      : 'border-gray-300'
+                      ? "border-red-500"
+                      : "border-gray-300"
                   }`}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -443,7 +452,7 @@ const Form = () => {
               </div>
 
               {/* campo imagen del producto */}
-              {/* {selectedImage && (
+              {selectedImage && (
                 <div className="w-full h-64 border border-gray-300 rounded-lg overflow-hidden">
                   <img
                     src={selectedImage}
@@ -457,7 +466,7 @@ const Form = () => {
                 accept="image/*"
                 onChange={handleImageChange}
                 className="mb-4"
-              /> */}
+              />
 
               {/* Botones del Form */}
               <div className="flex gap-2">
