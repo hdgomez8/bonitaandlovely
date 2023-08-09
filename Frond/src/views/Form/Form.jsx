@@ -105,10 +105,15 @@ const Form = () => {
       try {
         let updatedValues = { ...values };
 
-        if (response && response.data && response.data.data && response.data.data.url) {
+        if (
+          response &&
+          response.data &&
+          response.data.data &&
+          response.data.data.url
+        ) {
           console.log("Imagen subida a imgbb:", response.data.data.url);
           setImageUrl(response.data.data.url);
-    
+
           // Actualiza updatedValues con la URL de la imagen solo después de cargarla
           updatedValues = {
             ...updatedValues,
