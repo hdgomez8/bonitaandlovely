@@ -103,6 +103,8 @@ const Form = () => {
       console.log("Valores enviados:", values);
 
       try {
+        let updatedValuess = { ...values };
+
         if (values.imagenPrincipal) {
           const formData = new FormData();
           formData.append("image", values.imagenPrincipal);
@@ -120,12 +122,12 @@ const Form = () => {
           setImageUrl(response.data.data.url);
         }
 
-        const updatedValues = {
-          ...values,
-          imagenPrincipal: imageUrl,
+        updatedValuess = {
+          ...updatedValuess,
+          imagenPrincipal: response.data.data.url,
         };
 
-        const response = await axios.post("/producto", updatedValues);
+        const response = await axios.post("/producto", updatedValuess);
 
         console.log("Producto creado:", response.data);
         resetForm();
@@ -141,7 +143,6 @@ const Form = () => {
   const [selectedCategories, setSelectedCategories] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
 
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;
