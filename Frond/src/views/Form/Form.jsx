@@ -127,9 +127,9 @@ const Form = () => {
           imagenPrincipal: response.data.data.url,
         };
 
-        const response = await axios.post("/producto", updatedValues);
+        const responseProducto = await axios.post("/producto", updatedValues);
 
-        console.log("Producto creado:", response.data);
+        console.log("Producto creado:", responseProducto.data);
         resetForm();
       } catch (error) {
         console.error("Error al crear el producto:", error);
