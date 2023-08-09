@@ -476,9 +476,9 @@ const Form = () => {
               <div className="w-full h-80 border border-gray-300 rounded-lg overflow-hidden flex items-center justify-center">
                 {/* Círculo más grande */}
                 <div className="w-64 h-64 bg-gray-200 rounded-full flex items-center justify-center">
-                  {imageUrl ? (
+                  {formik.values.imagenPrincipal ? (
                     <img
-                      src={imageUrl}
+                      src={URL.createObjectURL(formik.values.imagenPrincipal)}
                       alt="Imagen seleccionada"
                       className="w-full h-full object-cover rounded-full"
                     />
