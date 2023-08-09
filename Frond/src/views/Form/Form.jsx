@@ -126,7 +126,7 @@ const Form = () => {
           ...updatedValues,
           imagenPrincipal: response.data.data.url,
         };
-
+        // RESPUESTA
         const responseProducto = await axios.post("/producto", updatedValues);
 
         console.log("Producto creado:", responseProducto.data);
