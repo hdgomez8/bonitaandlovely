@@ -105,27 +105,19 @@ const Form = () => {
       try {
         let updatedValues = { ...values };
 
-        if (values.imagenPrincipal) {
-          const formData = new FormData();
-          formData.append("image", values.imagenPrincipal);
-
-          const response = await axios.post(imgbbUploadUrl, formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-            params: {
-              key: imgbbApiKey,
-            },
-          });
-
+        if (response && response.data && response.data.data && response.data.data.url) {
           console.log("Imagen subida a imgbb:", response.data.data.url);
           setImageUrl(response.data.data.url);
+    
+          // Actualiza updatedValues con la URL de la imagen solo después de cargarla
+          updatedValues = {
+            ...updatedValues,
+            imagenPrincipal: response.data.data.url,
+          };
+        } else {
+          console.error("Error al obtener la URL de la imagen subida");
         }
 
-        updatedValues = {
-          ...updatedValues,
-          imagenPrincipal: response.data.data.url,
-        };
         // RESPUESTA
         const responseProducto = await axios.post("/producto", updatedValues);
 
