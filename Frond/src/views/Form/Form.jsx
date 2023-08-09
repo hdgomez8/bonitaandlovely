@@ -193,6 +193,7 @@ const Form = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.name}
+                    style={{ borderColor: 'rgb(222, 190, 234)' }}
                   />
                   {formik.touched.name && formik.errors.name ? (
                     <div className="text-red-500 text-sm mt-1">
@@ -452,9 +453,9 @@ const Form = () => {
               </div>
 
               {/* campo imagen del producto */}
-              <div className="w-full h-64 border border-gray-300 rounded-lg overflow-hidden">
-                {/* Círculo para cargar la imagen */}
-                <div className="w-32 h-32 mx-auto bg-gray-200 rounded-full flex items-center justify-center">
+              <div className="w-full h-80 border border-gray-300 rounded-lg overflow-hidden flex items-center justify-center">
+                {/* Círculo más grande */}
+                <div className="w-64 h-64 bg-gray-200 rounded-full flex items-center justify-center">
                   {selectedImage ? (
                     <img
                       src={selectedImage}
